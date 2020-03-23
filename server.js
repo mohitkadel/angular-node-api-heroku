@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const _ = require('lodash');
 const app = express();
+const bodyParser = require('body-parser');
 
 const dataSet = [
 	{
