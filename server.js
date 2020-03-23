@@ -77,10 +77,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get('/*', function(req,res) {
-    
-res.sendFile(path.join(__dirname+'/dist/frontend/index.html'));
-});
+
 
 routes.get('/', function(req, res) {
 	let params = req.query;
@@ -115,6 +112,12 @@ routes.get('/', function(req, res) {
 
 
 app.use('/api', routes);
+
+
+app.get('/*', function(req,res) {
+    
+res.sendFile(path.join(__dirname+'/dist/frontend/index.html'));
+});
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
