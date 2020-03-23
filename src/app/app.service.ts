@@ -40,6 +40,6 @@ export class AppService {
  //  	let params = new HttpParams();
 	// params = params.append('var1', val1);
 	// params = params.append('var2', val2);
-  	return this.http.get('http://localhost:3000/api', {params: query})
+  	return this.http.get('/api', {params: query})
   }
 }
