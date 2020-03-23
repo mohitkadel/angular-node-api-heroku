@@ -1,20 +1,182 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Contact</h4>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white">Follow on Twitter</a></li>
+            <li><a href="#" class="text-white">Like on Facebook</a></li>
+            <li><a href="#" class="text-white">Email me</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-light shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg> -->
+        <img src="/assets/images/logo.png">
+        <!-- <strong>Album</strong> -->
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+<main role="main" class="flex-shrink-0">
+  <div class="container">
+    <div class="d-flex flex-row">
+      <div class="col-sm-6">
+        
+        <h1 class="mt-5">Data Set <button class="btn btn-primary" data-toggle="modal" data-target="#dataModal">Add Data</button> </h1> <p>Adding data is not API based.</p>
+      </div>
+      <div class="col-sm-6">
+        <h1 class="mt-5 pull-right">
+          <a href="javascript:void(0)" (click)="printPdf()" title="Download PDF"><span class="fa fa-file-pdf-o fa-4"></span></a>
+        </h1>
+      </div>
+    </div>
+    <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()" novalidate class="table-responsive">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <th class="sortable" (click)="sort('name');" [ngClass]="{'asc': sortableField=='name', 'desc': sortableField=='-name'}">Name</th>
+          <th class="sortable" (click)="sort('email')" [ngClass]="{'asc': sortableField=='email', 'desc': sortableField=='-email'}">Email</th>
+          <th class="sortable" (click)="sort('lowest_price')" [ngClass]="{'asc': sortableField=='lowest_price', 'desc': sortableField=='-lowest_price'}">Lowest Price</th>
+          <th class="sortable" (click)="sort('rating')" [ngClass]="{'asc': sortableField=='rating', 'desc': sortableField=='-rating'}">Rating</th>
+          <th class="sortable" (click)="sort('max_speed')" [ngClass]="{'asc': sortableField=='max_speed', 'desc': sortableField=='-max_speed'}">Max Speed</th>
+          <th class="sortable" (click)="sort('description')" [ngClass]="{'asc': sortableField=='description', 'desc': sortableField=='-description'}">Description</th>
+          <th class="sortable" (click)="sort('contact_number')" [ngClass]="{'asc': sortableField=='contact_number', 'desc': sortableField=='-contact_number'}">Contact Number</th>
+          <th>Image</th>
+          <th>Url</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input type="text" class="form-control" formControlName="name" /></td>
+            <td><input type="text" class="form-control" formControlName="email" /></td>
+            <td><input type="text" class="form-control" formControlName="lowest_price" /></td>
+            <td><input type="text" class="form-control" formControlName="rating" /></td>
+            <td><input type="text" class="form-control" formControlName="max_speed" /></td>
+            <td><input type="text" class="form-control" formControlName="description" /></td>
+            <td><input type="text" class="form-control" formControlName="contact_number" /></td>
+            <td><input type="submit" value="submit" style="display: none;" /></td>
+            <td></td>
+          </tr>
+          <tr *ngFor="let d of data">
+            <td>{{d.name}}</td>
+            <td>{{d.email}}</td>
+            <td>{{d.lowest_price}}</td>
+            <td>{{d.rating}}</td>
+            <td>{{d.max_speed}}</td>
+            <td>{{d.description}}</td>
+            <td>{{d.contact_number}}</td>
+            <td>
+              <div class="dataimage" [ngStyle]="{'background-image': 'url('+d.image+')'}"></div>
+            </td>
+            <td><a href="{{d.url}}" target="_blank" title="Link"><span class="fa fa-external-link"></span></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+  </div>
+</main>
+<div class="modal fade" id="dataModal" tabindex="-1" role="dialog" aria-labelledby="dataModalTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <form [formGroup]="dataForm" #myForm="ngForm" (ngSubmit)="onDataSubmit()" novalidate>
+        <div class="modal-header">
+          <h5 class="modal-title" id="dataModalTitle">Add Data</h5>
 
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <!-- <div *ngIf="myForm.submitted" class="alert alert-success">Data successfully sumitted.</div> -->
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="name" formControlName="name" required [ngClass]="{'is-invalid' : ((dataForm.get('name').hasError('required') && dataForm.get('name').dirty) || (dataForm.get('name').hasError('required') && myForm.submitted))}">
+              <div class="invalid-feedback" *ngIf="((dataForm.get('name').hasError('required') && dataForm.get('name').dirty) || (dataForm.get('name').hasError('required') && myForm.submitted))" >Name is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="email" formControlName="email" required [ngClass]="{'is-invalid' : (((dataForm.get('email').hasError('required') || dataForm.get('email').invalid) && dataForm.get('email').dirty) || (dataForm.get('email').hasError('required') && myForm.submitted))}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+              <div class="invalid-feedback" *ngIf="(((dataForm.get('email').hasError('required') || dataForm.get('email').invalid)  && dataForm.get('email').dirty) || (dataForm.get('email').hasError('required') && myForm.submitted))" >Email is invalid.</div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="lowest_price" class="col-sm-2 col-form-label">Lowest Price</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="lowest_price" formControlName="lowest_price" required [ngClass]="{'is-invalid' : ((dataForm.get('lowest_price').hasError('required') && dataForm.get('lowest_price').dirty) || (dataForm.get('lowest_price').hasError('required') && myForm.submitted))}">
+              <div class="invalid-feedback" *ngIf="((dataForm.get('lowest_price').hasError('required') && dataForm.get('lowest_price').dirty) || (dataForm.get('lowest_price').hasError('required') && myForm.submitted))" >Lowest Price is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="rating" class="col-sm-2 col-form-label">Rating</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="rating" formControlName="rating" required [ngClass]="{'is-invalid' : ((dataForm.get('rating').hasError('required') && dataForm.get('rating').dirty) || (dataForm.get('rating').hasError('required') && myForm.submitted))}">
+              <div class="invalid-feedback" *ngIf="((dataForm.get('rating').hasError('required') && dataForm.get('rating').dirty) || (dataForm.get('rating').hasError('required') && myForm.submitted))" >Rating is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="contact_number" class="col-sm-2 col-form-label">Contact Number</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="contact_number" formControlName="contact_number" required [ngClass]="{'is-invalid' : ((dataForm.get('contact_number').hasError('required') && dataForm.get('contact_number').dirty) || (dataForm.get('contact_number').hasError('required') && myForm.submitted))}">
+              <div class="invalid-feedback" *ngIf="((dataForm.get('contact_number').hasError('required') && dataForm.get('contact_number').dirty) || (dataForm.get('contact_number').hasError('required') && myForm.submitted))" >Contact Number is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="max_speed" class="col-sm-2 col-form-label">Max Speed</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="max_speed" formControlName="max_speed" required [ngClass]="{'is-invalid' : ((dataForm.get('max_speed').hasError('required') && dataForm.get('max_speed').dirty) || (dataForm.get('max_speed').hasError('required') && myForm.submitted))}">
+              <div class="invalid-feedback" *ngIf="((dataForm.get('max_speed').hasError('required') && dataForm.get('max_speed').dirty) || (dataForm.get('max_speed').hasError('required') && myForm.submitted))" >Max Speed is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="description" rows="3" formControlName="description" required [ngClass]="{'is-invalid' : ((dataForm.get('description').hasError('required') && dataForm.get('description').dirty) || (dataForm.get('description').hasError('required') && myForm.submitted))}"></textarea>
+              <div class="invalid-feedback" *ngIf="((dataForm.get('description').hasError('required') && dataForm.get('description').dirty) || (dataForm.get('description').hasError('required') && myForm.submitted))" >Description is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="image" class="col-sm-2 col-form-label">Image</label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control-file" id="image" formControlName="image" required [ngClass]="{'is-invalid' : ((dataForm.get('image').hasError('required') && dataForm.get('image').dirty) || (dataForm.get('image').hasError('required') && myForm.submitted))}" #fileInput (change)="onChange(fileInput.files[0])" accept='image/*'>
+              <div class="invalid-feedback" *ngIf="((dataForm.get('image').hasError('required') && dataForm.get('image').dirty) || (dataForm.get('image').hasError('required') && myForm.submitted))">Image is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="url" class="col-sm-2 col-form-label">URL</label>
+            <div class="col-sm-10">
+              <input type="url" class="form-control" id="url" formControlName="url" required [ngClass]="{'is-invalid' : (((dataForm.get('url').hasError('required') || dataForm.get('url').invalid) && dataForm.get('url').dirty) || (dataForm.get('url').hasError('required') && myForm.submitted))}" pattern="^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}">
+              <div class="invalid-feedback" *ngIf="(((dataForm.get('url').hasError('required') || dataForm.get('url').invalid) && dataForm.get('url').dirty) || (dataForm.get('url').hasError('required') && myForm.submitted))" >URL is required.</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary" name="save" value="Save Changes"/>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
